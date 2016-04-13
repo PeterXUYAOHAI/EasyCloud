@@ -129,22 +129,18 @@
                                 <!-- Modal Body -->
                                 <div class="modal-body">
 
-                                    <form role="form">
+                                    <form role="form" id="keyForm">
                                       <div class="form-group">
-                                        <label for="exampleInputEmail1">Public Key</label>
+                                        <label id="publicKeyLabel">Public Key</label>
                                         <input id="publicKey" type="email" class="form-control"
                                         placeholder="Public Key"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Secret Key</label>
+                                        <label for="publicKeyLabel">Secret Key</label>
                                         <input id="secretKey" type="password" class="form-control"
                                         placeholder="Secret Key"/>
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"/> Check me out
-                                        </label>
-                                    </div>
+                                    
                                 </form>
 
 
@@ -211,7 +207,7 @@
                             
                         </div>
                         <!-- /.list-group -->
-                        <a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">View All Alerts</a>
+                        <a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -298,7 +294,7 @@
 
                             <div class="form-group">
                                 <div class="col-xs-5 col-xs-offset-3">
-                                    <button  class="btn btn-default" >Validate</button>
+                                    <a  class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a>
                                 </div>
                             </div>
                         </form>

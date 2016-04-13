@@ -2,10 +2,50 @@ $('#service_selector').change(function(){
 	var opt = $(this).val();
 	if (opt == "aws") {
 		$("#size_selector").html('<option value="small" selected="selected" >aSmall</option><option value="medium">aMedium</option><option value="large">aLarge</option>');
+		$("#myModalLabel").text("Pleae Input AWS Key");
+		$("#keyForm").html('<div class="form-group">'+
+'                                        <label id="publicKeyLabel">AWS Public Key</label>'+
+'                                       <input id="awsPublicKey" type="email" class="form-control"'+
+'                                        placeholder="Public Key"/>'+
+'                                    </div>'+
+'                                    <div class="form-group">'+
+'                                        <label for="publicKeyLabel">AWS Secret Key</label>'+
+'                                        <input id="awsSecretKey" type="password" class="form-control"'+
+'                                        placeholder="Secret Key"/>'+
+ '                                   </div>')
+
 	} else if (opt == "google") {
 		$("#size_selector").html('<option value="small" selected="selected">gSmall</option><option value="medium">gMedium</option><option value="large">`gLarge</option>');
+		$("#myModalLabel").text("Pleae Input Google Cloud Key");
+		$("#keyForm").html('<div class="form-group">'+
+'                                        <label id="publicKeyLabel">Project ID</label>'+
+'                                        <input id="googleProjectId" type="email" class="form-control"'+
+'                                        placeholder="Public Key"/>'+
+'                                   </div>'+
+'                                    <div class="form-group">'+
+'                                       <label id="publicKeyLabel">Client ID</label>'+
+'                                       <input id="googleClientId" type="email" class="form-control"'+
+'                                       placeholder="Public Key"/>'+
+'                                   </div>'+
+'                                    <div class="form-group">'+
+'                                        <label for="publicKeyLabel">API Key</label>'+
+'                                        <input id="googleApiKey" type="password" class="form-control"'+
+'                                        placeholder="Secret Key"/>'+
+'                                    </div>')
+
 	} else if (opt == "aliyun") {
 		$("#size_selector").html('<option value="small" selected="selected">lSmall</option><option value="medium">lMedium</option><option value="large">lLarge</option>');
+		$("#myModalLabel").text("Pleae Input Aliyun Key");
+		$("#keyForm").html('<div class="form-group">'+
+'                                        <label id="publicKeyLabel">Aliyun Public Key</label>'+
+'                                        <input id="aliyunPublicKey" type="email" class="form-control"'+
+'                                        placeholder="Public Key"/>'+
+'                                    </div>'+
+'                                    <div class="form-group">'+
+'                                        <label for="publicKeyLabel">Aliyun Secret Key</label>'+
+'                                        <input id="aliyunSecretKey" type="password" class="form-control"'+
+'                                        placeholder="Secret Key"/>'+
+'                                    </div>')
 	}
 
 });   
@@ -27,8 +67,8 @@ $("#creatButton").click(function(){
 	serviceProvider = $("#service_selector").val();
 	totalInstanceNum++;
 	if(serviceProvider=="aliyun"){
-		aliyunPublicKey=$("#publicKey").val();
-		aliyunSecretKey=$("#secretKey").val();
+		aliyunPublicKey=$("#aliyunPublicKey").val();
+		aliyunSecretKey=$("#aliyunSecretKey").val();
 		prepareParameter();
 		aliyunCreateInstance();
 	}
