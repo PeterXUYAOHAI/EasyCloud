@@ -1,0 +1,420 @@
+$('#service_selector').change(function(){   
+	var opt = $(this).val();
+	if (opt == "aws") {
+		$("#size_selector").html('<option value="small" selected="selected" >aSmall</option><option value="medium">aMedium</option><option value="large">aLarge</option>');
+	} else if (opt == "google") {
+		$("#size_selector").html('<option value="small" selected="selected">gSmall</option><option value="medium">gMedium</option><option value="large">`gLarge</option>');
+	} else if (opt == "aliyun") {
+		$("#size_selector").html('<option value="small" selected="selected">lSmall</option><option value="medium">lMedium</option><option value="large">lLarge</option>');
+	}
+
+});   
+
+
+var serviceProvider;
+var totalInstanceNum = 0;
+var ALY = window.ALY;
+var aliyunPublicKey;
+var aliyunSecretKey;
+var aliyunOS;
+var aliyunDiskType;
+var aliyunDiskSize;
+var aliyunInstanceSize;
+var aliyunRegion;
+
+$("#creatButton").click(function(){
+
+	serviceProvider = $("#service_selector").val();
+	totalInstanceNum++;
+	if(serviceProvider=="aliyun"){
+		aliyunPublicKey=$("#publicKey").val();
+		aliyunSecretKey=$("#secretKey").val();
+		prepareParameter();
+		aliyunCreateInstance();
+	}
+});
+
+
+
+function prepareParameter(){
+	var instanceSize = $("#size_selector").val();
+	var os = $("#os_selector").val();
+	var diskT = $("#diskT_selector").val();
+	var diskS = $("#diskS_selector").val();
+	var reg = $("#region_selector").val();
+
+	if(instanceSize=="small")
+		aliyunInstanceSize = 'ecs.t1.small';
+	else if (instanceSize=="medium")
+		aliyunInstanceSize = 'ecs.s1.medium';
+	else if (instanceSize=="large") 
+		aliyunInstanceSize = 'ecs.s1.large';
+
+	if(os=="ubuntu")
+		aliyunOS="ubuntu1404_64_20G_aliaegis_20150130.vhd";
+	else if (os=="centos")
+		aliyunOS="centos6u5_64_20G_aliaegis_20150130.vhd";
+	else if (os=="debian")
+		aliyunOS="debian750_64_20G_aliaegis_20150130.vhd";
+	else if (os=="suse")
+		aliyunOS="opensuse1301_64_20G_aliaegis_20150130.vhd";
+	else if (os=="windows")
+		aliyunOS="win2012_stand_cn_40G_20141114.vhd";
+
+
+	if(diskT == "normal")
+		aliyunDiskType = "cloud";
+	else if(diskT == "ssd")
+		aliyunDiskType = "cloud_ssd";
+
+	if(diskS == "small")
+		aliyunDiskSize = 10;
+	else if(diskS=="medium")
+		aliyunDiskSize = 30;
+	else if(diskS=="large")
+		aliyunDiskSize = 80;
+
+	if(reg == "am")
+		aliyunRegion = "us-west-1";
+	else if(reg=="as")
+		aliyunRegion = "cn-shenzhen";
+	else if(reg == "eu"){
+		alert("No Instance in Europe Region");
+		return;
+	}
+}
+
+var aliyunEcs;
+function aliyunCreateInstance(){
+
+	aliyunConnectEcs();
+
+	var instanceID = aliyunCreateNewInstance();
+//	aliyunAllocatePublicIpAddress(instanceID);
+
+}
+
+function aliyunConnectEcs(){
+	alert(aliyunPublicKey);
+	alert(aliyunSecretKey);
+	aliyunEcs = new ALY.ECS({
+		accessKeyId: aliyunPublicKey,
+		secretAccessKey: aliyunSecretKey,
+		endpoint: 'https://ecs-cn-hangzhou.aliyuncs.com',
+		apiVersion: '2014-05-26'
+		}
+
+	);
+}
+
+
+function aliyunCreateNewInstance(){
+	var instanceId;
+	alert(aliyunRegion);
+	aliyunEcs.createInstance({
+		RegionId: aliyunRegion,
+		ImageId: aliyunOS,
+		InstanceType:aliyunInstanceSize,
+		SecurityGroupId:'sg-94erb3a85',
+		InternetChargeType:'PayByTraffic',
+		InternetMaxBandwidthOut:1,
+//		DataDisk.1.Category: aliyunDiskType,
+//		DataDisk.1.Size: aliyunDiskSize
+	}, function(err, res) {
+		console.log(err, res);
+		instanceId = res.InstanceId;
+		alert(instanceId);
+		aliyunAllocatePublicIpAddress(instanceId);
+
+	});
+	return instanceId;
+}
+
+
+function aliyunAllocatePublicIpAddress(instanceId){
+	alert("pub INSTANCEID" + instanceId);
+	var IpAddress;
+	aliyunEcs.allocatePublicIpAddress({
+		InstanceId:instanceId},
+		function(err,res){
+			console.log(err, res);
+			alert("aliyunIpAlloted" + res.IpAddress);
+			IpAddress = res.IpAddress;
+			aliyunGetInstanceAttributes(instanceId)
+		});
+}
+
+// function aliyunGetPublicIP(){
+// 	aliyunEcs.describeInstanceAttribute({
+// 		InstanceId:InstanceId},
+// 		function(err, res) {
+// 			console.log(err, res);
+// 			alert(res.PublicIpAddress.IpAddress)
+// 		});
+
+// }
+
+function aliyunGetInstanceAttributes(instanceId){
+	aliyunEcs.describeInstanceAttribute({
+		InstanceId:instanceId},
+		function(err, res) {
+			console.log(err, res);
+			alert(res.PublicIpAddress.IpAddress);
+			var detailString = aliyunGenerateDetailContent(res);
+			createBlock(detailString, res);
+			buttonListenerFresh();
+		});
+
+}
+
+function buttonListenerFresh(){
+$(".aliyunStart").click(function(){
+	alert("start button is clicked");
+	var instanceId = $(this).val();
+	alert("gotten instance Id"+ instanceId);
+	aliyunEcs.startInstance({
+		InstanceId:instanceId},
+		function(err, res) {
+			console.log(err, res);
+			if(res){
+				alert("Instance "+instanceId+"is started");
+
+				$("#"+instanceId+"Status").text("Running");
+			}
+		});
+});
+
+
+$(".aliyunStop").click(function(){
+	alert("stop button is clicked");
+	var instanceId = $(this).val();
+	alert("gotten instance Id");
+	aliyunEcs.stopInstance({
+		InstanceId:instanceId},
+		function(err, res) {
+			console.log(err, res);
+			if(res){
+				alert("Instance "+instanceId+"is stopped");
+			$("#"+instanceId+"Status").text("Stopped");
+		}
+		});
+});
+
+$(".aliyunTerminate").click(function(){
+	var instanceId = $(this).val();
+	aliyunEcs.deleteInstance({
+		InstanceId:instanceId},
+		function(err, res) {
+			console.log(err, res);
+			if(res){
+				alert("Instance "+instanceId+"is terminated");
+			$("#"+instanceId).remove();
+		}
+		});
+});
+}
+
+
+function aliyunGenerateDetailContent(attributes){
+
+	var creationTime = attributes.CreationTime;
+	var imageId = attributes.ImageId;
+	var innerIpAddress = attributes.InnerIpAddress.IpAddress;
+	var instanceId = attributes.InstanceId;
+	var instanceName = attributes.InstanceName;
+	var instanceType = attributes.InstanceType;
+	var internetChargeType = attributes.InternetChargeType;
+	var publicIpAddress = attributes.PublicIpAddress.IpAddress;
+	var regionId = attributes.RegionId;
+	var status = attributes.Status;
+
+	var detailHtmlString=''+
+'			<div class="list-group text-left">'+
+'							<a class="list-group-item">'+
+'                                <i class="fa fa-power-off fa-fw"></i> Status'+
+'                                <span class="pull-right text-primary"><em id="'+instanceId+'Status">'+ status +'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                           <a class="list-group-item">'+
+'                                <i class="fa fa-cloud fa-fw"></i> Service Provider'+
+'                                <span class="pull-right text-muted small"><em>'+ serviceProvider +'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                            <a class="list-group-item">'+
+'                               <i class="fa fa-sellsy fa-fw"></i> Instance Type'+
+'                                <span class="pull-right text-muted small"><em>'+ instanceType +'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                            <a class="list-group-item">'+
+'                                <i class="fa fa-cloud fa-fw"></i> Instance Id'+
+'                                <span class="pull-right text-muted small"><em>'+ instanceId +'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                            <a class="list-group-item">'+
+'                                <i class="fa fa-angle-double-up fa-fw"></i> Public IP<span class="pull-right text-muted small"><em>'+publicIpAddress+'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                             <a class="list-group-item">'+
+'                                <i class="fa fa-angle-up fa-fw"></i> Inner IP<span class="pull-right text-muted small"><em>'+innerIpAddress+'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                            <a class="list-group-item">'+
+'                                <i class="fa fa-map fa-fw"></i> Region Id<span class="pull-right text-muted small"><em>'+regionId+'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                            <a class="list-group-item">'+
+'                                <i class="fa fa-desktop fa-fw"></i> Image Id'+
+'                                <span class="pull-right text-muted small"><em></em>'+									
+'                           </span>'+
+'								<p class="text-muted small">'+ imageId +'</p>'+
+'                             </a>'+
+'                           <a class="list-group-item">'+
+'                                <i class="fa fa-clock-o fa-fw"></i> Creation Time'+
+'                                <span class="pull-right text-muted small"><em>'+creationTime+'</em>'+
+'                                </span>'+
+'                            </a>'+
+'                        </div>';
+
+
+				return detailHtmlString;
+
+}
+
+// $("#test").click(function(){
+
+// 	createBlock();
+// });
+
+function createBlock(detailString, attributes){
+	if(serviceProvider=="aliyun"){
+		var instanceId = attributes.InstanceId;
+		var publicIP = attributes.PublicIpAddress.IpAddress;
+		var innerIp = attributes.InnerIpAddress.IpAddress;
+		var detailString = detailString;
+	$("#instanceList").append(
+			'<div id="'+instanceId+'">\
+				<div class="col-lg-4 col-md-6">\
+               <div class="panel panel-red">\
+                    <div class="panel-heading">\
+                        <div class="row">\
+                            <div class="col-xs-3">\
+                                <i class="fa fa-cloud fa-5x"></i>\
+                            </div>\
+                            <div class="col-xs-9 text-right">\
+                                <div class="huge">Aliyun ECS</div>\
+                                <div>Public IP:'+ publicIP + ' </div>\
+                                <div>Inner IP:'+ innerIp + ' </div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                    <div class="panel-footer">\
+                       <div class="panel panel-default" id="panel3">\
+                            <div id="collapse'+totalInstanceNum+'" class="panel-collapse collapse">\
+                                <div class="panel-body">'+detailString +'</div>\
+                            </div>\
+                        </div>\
+                        <a data-toggle="collapse" data-target="#collapse'+totalInstanceNum+'"\
+                             class="collapsed">\
+                    <span class="pull-left">View Details</span>\
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>\
+                    <div class="clearfix"></div>\
+                </a>\
+                	<button class="btn btn-primary btn-md aliyunStart" value="'+instanceId+'"> Start </button>\
+                    <button class="btn btn-warning btn-md aliyunStop" value="'+instanceId+'"> Stop </button>\
+                    <button class="btn btn-danger btn-md aliyunTerminate" value="'+instanceId+'"> Terminate </button>\
+                    </div>\
+                </div>\
+            </div>\
+            </div>'
+		);
+	}
+	else if(serviceProvider=="google"){
+		var publicIP = "1.1.1.1";
+		var detailString = "this is detail";
+		$("#instanceList").append(
+
+			'<div class="col-lg-3 col-md-6">\
+               <div class="panel panel-primary">\
+                    <div class="panel-heading">\
+                        <div class="row">\
+                            <div class="col-xs-3">\
+                                <i class="fa fa-google fa-5x"></i>\
+                            </div>\
+                            <div class="col-xs-9 text-right">\
+                                <div class="huge">Google Cloud</div>\
+                                <div>Public IP:'+ publicIP + ' </div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                    <div class="panel-footer">\
+                       <div class="panel panel-default" id="panel3">\
+                            <div id="collapse'+totalInstanceNum+'" class="panel-collapse collapse">\
+                                <div class="panel-body">'+detailString +'</div>\
+                            </div>\
+                        </div>\
+                        <a data-toggle="collapse" data-target="#collapse'+totalInstanceNum+'"\
+                             class="collapsed">\
+                    <span class="pull-left">View Details</span>\
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>\
+                    <div class="clearfix"></div>\
+                </a>\
+                    </div>\
+                </div>\
+            </div>'
+		);
+	}
+
+	else if(serviceProvider=="aws"){
+		var publicIP = "1.1.1.1";
+		var detailString = "this is detail";
+		$("#instanceList").append(
+
+			'<div class="col-lg-3 col-md-6">\
+               <div class="panel panel-yellow">\
+                    <div class="panel-heading">\
+                        <div class="row">\
+                            <div class="col-xs-3">\
+                                <i class="fa fa-amazon fa-5x"></i>\
+                            </div>\
+                            <div class="col-xs-9 text-right">\
+                                <div class="huge">AWS EC2</div>\
+                                <div>Public IP:'+ publicIP + ' </div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                    <div class="panel-footer">\
+                       <div class="panel panel-default" id="panel3">\
+                            <div id="collapse'+totalInstanceNum+'" class="panel-collapse collapse">\
+                                <div class="panel-body">'+detailString +'</div>\
+                            </div>\
+                        </div>\
+                        <a data-toggle="collapse" data-target="#collapse'+totalInstanceNum+'"\
+                             class="collapsed">\
+                    <span class="pull-left">View Details</span>\
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>\
+                    <div class="clearfix"></div>\
+                </a>\
+                    </div>\
+                </div>\
+            </div>'
+		);
+	}
+
+	}
+
+
+
+
+
+
+//function creatInstance(){
+
+	
+
+
+
+
+
+
+
+

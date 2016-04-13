@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scrolling Nav - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+
+    <link href="css/customed.css" rel="stylesheet">
+
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                        <li class="hidden">
+                            <a class="page-scroll" href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#about">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#services">Services</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Intro Section -->
+        <section id="intro" class="intro-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Scrolling Nav</h1>
+                        <p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>, and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding ID on the page.</p>
+                        <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>About Section</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Start Instance</h1>
+                        <div class="row">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" 
+                                        data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Please Input Key
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <form role="form">
+                                      <div class="form-group">
+                                        <label for="exampleInputEmail1">Public Key</label>
+                                        <input id="publicKey" type="email" class="form-control"
+                                        placeholder="Public Key"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Secret Key</label>
+                                        <input id="secretKey" type="password" class="form-control"
+                                        placeholder="Secret Key"/>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"/> Check me out
+                                        </label>
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                                Close
+                            </button>
+                            <button id="creatButton" data-target=type="button" class="btn btn-primary" data-dismiss="modal">
+                                Submit and Create Instance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-thumbs-o-up fa-fw"></i>
+                        Recommand Setting
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a  class="list-group-item">
+
+                                <i class="fa fa-cloud fa-fw"></i> Service Provider
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+
+                                <i class="fa fa-server fa-fw"></i> Instance Size
+
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-envelope fa-fw"></i> Opearating System
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                              
+
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-tasks fa-fw"></i> Disk Type
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-upload fa-fw"></i> Disk Size
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-bolt fa-fw"></i> Region
+                                <span class="pull-right text-muted small"><em>-</em>
+                                </span>
+                            </a>
+                            
+                        </div>
+                        <!-- /.list-group -->
+                        <a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">View All Alerts</a>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Select By Myself
+                    </div>
+                    <div class="panel-body">
+                        <form id="bootstrapSelectForm" method="post" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Service Provider</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <select id="service_selector" name="language" class="form-control selectpicker" data-show-icon="true">
+                                        <option value="aws" data-content="<i class='fa fa-amazon fa-fw'></i>AWS"></option>
+                                        <option value="google" data-content="<i class='fa fa-google fa-fw'></i>Google Cloud"></option>
+                                        <option value="aliyun" data-content="<i class='fa fa-cloud fa-fw'></i>Aliyun"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Instance Size</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <select id = "size_selector" name="language" class="form-control selectpicker">
+                                        <option value="small">aSmall</option>
+                                        <option value="medium">aMedium</option>
+                                        <option value="large">aLarge</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Opearating System</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <select id = "os_selector" name="language" class="form-control selectpicker">
+                                        <option value="ubuntu">Ubuntu</option>
+                                        <option value="centos">CentOS</option>
+                                        <option value="debian">Debian</option>
+                                        <option value="suse">OpenSUSE</option>
+                                        <option value="windows">Windows Server</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Disk Type</label>
+                                <div  class="col-xs-5 selectContainer ">
+                                    <select id = "diskT_selector" name="language" class="form-control selectpicker">
+                                        <option value="normal">Normal</option>
+                                        <option value="ssd">SSD</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Disk Size</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <select id="diskS_selector" name="language" class="form-control selectpicker">
+
+                                        <option value="small">Small(10G)</option>
+                                        <option value="medium">Medium(30G)</option>
+                                        <option value="large">Large(80G)</option>
+                                    </select>
+                                 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Region</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <select id="region_selector" name="language" class="form-control selectpicker">
+
+                                        <option value="am">America</option>
+                                        <option value="as">Asia</option>
+                                        <option value="eu">Europe</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-xs-5 col-xs-offset-3">
+                                    <button  class="btn btn-default" >Validate</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Contact Section</h1>
+            </div>
+        </div>
+
+        <div id="instanceList" class="row">
+          <!--   <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-comments fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">26</div>
+                                <div>New Comments!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">12</div>
+                                <div>New Tasks!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">124</div>
+                                <div>New Orders!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div> -->
+<!--             <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-cloud fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">Aliyun ECS</div>
+                                <div>Public IP: </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                       <div class="panel panel-default" id="panel3">
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">Anim pariatur cliche reprehenderit, </div>
+                            </div>
+                        </div>
+                        <a data-toggle="collapse" data-target="#collapseThree"
+                            href="#collapseThree" class="collapsed">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </a>
+                    <button class="btn btn-primary btn-md"> Start </button>
+                    <button class="btn btn-warning btn-md"> Stop </button>
+                    <button class="btn btn-danger btn-md"> Terminate </button>
+
+                    </div>
+                </div>
+            </div> -->
+<!--             <button id="test">Test</button> -->
+        </div>
+
+
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Scrolling Nav JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script src="js/aliyun-sdk.js"></script>
+<script src="js/costumed.js" ></script>
+
+</body>
+
+</html>
