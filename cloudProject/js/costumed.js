@@ -1,7 +1,10 @@
+//$('#size_selector').val('medium');
+
 $('#service_selector').change(function(){   
 	var opt = $(this).val();
 	if (opt == "aws") {
 		$("#size_selector").html('<option value="small" selected="selected" >aSmall</option><option value="medium">aMedium</option><option value="large">aLarge</option>');
+		$('#size_selector').selectpicker('refresh');
 		$("#myModalLabel").text("Pleae Input AWS Key");
 		$("#keyForm").html('<div class="form-group">'+
 '                                        <label id="publicKeyLabel">AWS Public Key</label>'+
@@ -16,6 +19,7 @@ $('#service_selector').change(function(){
 
 	} else if (opt == "google") {
 		$("#size_selector").html('<option value="small" selected="selected">gSmall</option><option value="medium">gMedium</option><option value="large">`gLarge</option>');
+		$('#size_selector').selectpicker('refresh');
 		$("#myModalLabel").text("Pleae Input Google Cloud Key");
 		$("#keyForm").html('<div class="form-group">'+
 '                                        <label id="publicKeyLabel">Project ID</label>'+
@@ -34,7 +38,18 @@ $('#service_selector').change(function(){
 '                                    </div>')
 
 	} else if (opt == "aliyun") {
-		$("#size_selector").html('<option value="small" selected="selected">lSmall</option><option value="medium">lMedium</option><option value="large">lLarge</option>');
+		$("#size_selector").html('<option value="ecs.t1.small" selected="selected">Small (ecs.t1.small) </option><option value="ecs.s1.medium">Medium (ecs.s1.medium) </option><option value="ecs.s1.large">Large (ecs.s1.large) </option><option value="ecs.s2.xlarge">Extra Large (ecs.s2.xlarge) </option>');
+		$("#region_selector").html('<option value="ap-southeast-1">Singapore</option>'+
+                                   '<option value="cn-shenzhen">China Shenzhen</option>'+
+                                   ' <option value="cn-qingdao">China Qingdao</option>'+
+                                    '<option value="cn-beijing">China Beijing</option>'+
+                                    '<option value="cn-hangzhou">China Hangzhou</option>'+
+                                    '<option value="cn-shanghai">China Shanghai</option>'+
+                                    '<option value="cn-hongkong">Hong Kong</option>'+
+                                    '<option value="us-west-1">US Slicon Valley</option>'+
+                                    '<option value="us-east-1">US Virginia</option>');
+		$("#region_selector").selectpicker('refresh');
+		$('#size_selector').selectpicker('refresh');
 		$("#myModalLabel").text("Pleae Input Aliyun Key");
 		$("#keyForm").html('<div class="form-group">'+
 '                                        <label id="publicKeyLabel">Aliyun Public Key</label>'+
@@ -83,12 +98,12 @@ function prepareParameter(){
 	var diskS = $("#diskS_selector").val();
 	var reg = $("#region_selector").val();
 
-	if(instanceSize=="small")
-		aliyunInstanceSize = 'ecs.t1.small';
-	else if (instanceSize=="medium")
-		aliyunInstanceSize = 'ecs.s1.medium';
-	else if (instanceSize=="large") 
-		aliyunInstanceSize = 'ecs.s1.large';
+	// if(instanceSize=="small")
+	// 	aliyunInstanceSize = 'ecs.t1.small';
+	// else if (instanceSize=="medium")
+	// 	aliyunInstanceSize = 'ecs.s1.medium';
+	// else if (instanceSize=="large") 
+		aliyunInstanceSize = instanceSize;
 
 	if(os=="ubuntu")
 		aliyunOS="ubuntu1404_64_20G_aliaegis_20150130.vhd";
@@ -114,14 +129,15 @@ function prepareParameter(){
 	else if(diskS=="large")
 		aliyunDiskSize = 80;
 
-	if(reg == "am")
-		aliyunRegion = "us-west-1";
-	else if(reg=="as")
-		aliyunRegion = "cn-shenzhen";
-	else if(reg == "eu"){
-		alert("No Instance in Europe Region");
+	// if(reg == "am")
+	// 	aliyunRegion = "us-west-1";
+	// else if(reg=="as")
+	// 	aliyunRegion = "cn-shenzhen";
+	// else if(reg == "eu"){
+	// 	alert("No Instance in Europe Region");
+	aliyunRegion = reg;
 		return;
-	}
+	
 }
 
 var aliyunEcs;
