@@ -346,9 +346,9 @@ function executeRequest(request, apiRequestName) {
 '                             </a>'+
 '                           <a class="list-group-item">'+
 '                                <i class="fa fa-clock-o fa-fw"></i> Creation Time'+
-'                                <span class="pull-right text-muted small"><em>''</em>'+
-'                                </span>' + '
-								<p class="text-muted small">'+DEFAULT_RETURN_CREATETIME+'</p>'+
+'                                <span class="pull-right text-muted small"><em></em>'+
+'                                </span>' + 
+'								<p class="text-muted small">'+DEFAULT_RETURN_CREATETIME+'</p>'+
 '                            </a>'+
 '                        </div>';
 		
