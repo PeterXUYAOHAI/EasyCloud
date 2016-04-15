@@ -17,7 +17,7 @@ $('#service_selector').change(function(){
 '                                        <label for="publicKeyLabel">AWS Secret Key</label>'+
 '                                        <input id="awsSecretKey" type="password" class="form-control"'+
 '                                        placeholder="Secret Key"/>'+
- '                                   </div>')
+ '                                   </div>');
 
 	} else if (opt == "google") {
 		$("#size_selector").html('<option value="f1-micro" selected="selected">Small</option><option value="n1-standard-4">Medium</option><option value="n1-highmem-8">Large</option>');

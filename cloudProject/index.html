@@ -106,7 +106,7 @@
                     <form action="">
                         <h2>CPU Power</h2>
 
-                        <input type="text" name="lname" value="2G" id="cpuPower"><br>                   
+                        <input type="text" name="lname" value="2" id="cpuPower"><br>                   
 
                         <br />
                         <h2>RAM</h2>
@@ -117,7 +117,19 @@
 
                         <h2>Storage Size</h2>
 
-                        <input type="text" name="lname"><br>
+                        <input type="text" name="lname" id="storageSize"><br>
+
+                        <br />
+
+                        <h2>Opearating System</h2>
+                        <div class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="linux" id="radio14" name="os" > <label for="radio14"><span></span>Linux</label>  </input>                    
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="winsows" id="radio15" name="os"/> <label for="radio15"><span></span>Windows</label>                      
+                            </div>
+                        </div>
 
                         <br />
 
@@ -137,7 +149,7 @@
                                 <input type="radio" value="lessThanOne" id="radio03" name="sub" /> <label for="radio03"><span></span>Less than one Month</label>                      
                             </div>
                             <div class="btn btn-default btn-lg">                        
-                                <input type="radio" value="moreThanOne" id="radio04" name="sub"/> <label for="radio04"><span></span>More than one Month<16G</label>                      
+                                <input type="radio" value="moreThanOne" id="radio04" name="sub"/> <label for="radio04"><span></span>More than one Month</label>                      
                             </div>
                         </div>
 
@@ -270,36 +282,36 @@
                             <a  class="list-group-item">
 
                                 <i class="fa fa-cloud fa-fw"></i> Service Provider
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdSP">-</em>
                                 </span>
                             </a>
                             <a  class="list-group-item">
 
                                 <i class="fa fa-server fa-fw"></i> Instance Size
 
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdIS">-</em>
                                 </span>
                             </a>
                             <a  class="list-group-item">
                                 <i class="fa fa-envelope fa-fw"></i> Opearating System
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdOS">-</em>
                                 </span>
 
 
                             </a>
                             <a  class="list-group-item">
                                 <i class="fa fa-tasks fa-fw"></i> Disk Type
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdDT">-</em>
                                 </span>
                             </a>
                             <a  class="list-group-item">
                                 <i class="fa fa-upload fa-fw"></i> Disk Size
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdDS">-</em>
                                 </span>
                             </a>
                             <a  class="list-group-item">
                                 <i class="fa fa-bolt fa-fw"></i> Region
-                                <span class="pull-right text-muted small"><em>-</em>
+                                <span class="pull-right text-muted small"><em id="recdReg">-</em>
                                 </span>
                             </a>
                             
