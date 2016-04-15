@@ -6,16 +6,14 @@ $('#service_selector').change(function(){
 		$("#size_selector").html('<option value="small" selected="selected" >aSmall</option><option value="medium">aMedium</option><option value="large">aLarge</option>');
 		$('#size_selector').selectpicker('refresh');
 		$("#myModalLabel").text("Pleae Input AWS Key");
-		$("#keyForm").html('<div class="form-group">'+
-'                                        <label id="publicKeyLabel">AWS Public Key</label>'+
-'                                       <input id="awsPublicKey" type="email" class="form-control"'+
-'                                        placeholder="Public Key"/>'+
-'                                    </div>'+
-'                                    <div class="form-group">'+
-'                                        <label for="publicKeyLabel">AWS Secret Key</label>'+
-'                                        <input id="awsSecretKey" type="password" class="form-control"'+
-'                                        placeholder="Secret Key"/>'+
- '                                   </div>')
+		$("#keyForm").html("<div class=\"form-group\">"+
+								"<label id=\"publicKeyLabel\">AWS Public Key</label>"+
+                                "<input id=\"awsPublicKey\" type=\"email\" class=\"form-control required\" placeholder=\Public Key\" />"+
+                            "</div>"+
+                            "<div class=\"form-group\">"+
+                                "<label for=\"publicKeyLabel\">AWS Secret Key</label>"+
+                                "<input id=\"awsSecretKey\" type=\"password\" class=\"form-control required\" placeholder=\"Secret Key\" />"+
+                            "</div>");
 
 	} else if (opt == "google") {
 		$("#size_selector").html('<option value="small" selected="selected">gSmall</option><option value="medium">gMedium</option><option value="large">`gLarge</option>');
@@ -77,8 +75,20 @@ var aliyunDiskSize;
 var aliyunInstanceSize;
 var aliyunRegion;
 
-$("#creatButton").click(function(){
+// Start AWS
+var awsAccessKey;
+var awsSecretKey;
+var accessKeyId;
+var secretAccessKey;
+var defaultRegion;
+var runningInstances;
+var AllUserInstances;
+var credentials;
+var ec2;
+var regionNames;
+// End AWS
 
+$("#creatButton").click(function(){
 	serviceProvider = $("#service_selector").val();
 	totalInstanceNum++;
 	if(serviceProvider=="aliyun"){
@@ -86,8 +96,253 @@ $("#creatButton").click(function(){
 		aliyunSecretKey=$("#aliyunSecretKey").val();
 		prepareParameter();
 		aliyunCreateInstance();
+	}else if(serviceProvider=="aws"){
+		defaultRegion = "us-east-1";
+        regionNames = {
+            "us-east-1" : "US East (N. Virginia)",
+            "us-west-1" : "US West (N. California)",
+            "us-west-2" : "US West (Oregon)",
+            "eu-west-1" : "EU (Ireland)",
+            "eu-central-1" : "EU (Frankfurt)",
+            "ap-northeast-1" : "Asia Pacific (Tokyo)",
+            "ap-northeast-2" : "Asia Pacific (Seoul)",
+            "ap-southeast-1" : "Asia Pacific (Singapore)",
+            "ap-southeast-2" : "Asia Pacific (Sydney)",
+            "sa-east-1" : "South America (São Paulo)"
+        };
+		var accessKeyElem = $("#awsPublicKey");
+        var secretKeyElem = $("#awsSecretKey");
+        awsAccessKey= accessKeyElem.val();
+        awsSecretKey= secretKeyElem.val();
+
+        accessKeyElem.closest('.form-group').removeClass('has-error').addClass('has-success');
+        secretKeyElem.closest('.form-group').removeClass('has-error').addClass('has-success');
+        var region = defaultRegion;
+        configureCredentialsAndRegion(awsAccessKey, awsSecretKey, region);
+        populateAndDisplayForm();
+        createEC2Instance();
 	}
 });
+
+
+/* Start AWS */
+function configureCredentialsAndRegion(accessKey, secretKey, region){
+    accessKeyId = accessKey;
+    secretAccessKey = secretKey;
+    credentials = new AWS.Credentials(accessKeyId, secretAccessKey, null);
+    AWS.config.credentials = credentials;
+
+    // Configure the region
+    defaultRegion = region;
+    AWS.config.region = defaultRegion;
+
+    //  Instantiate an EC2 object
+    ec2 = new AWS.EC2();
+
+    console.log(AWS.config);
+    // createEC2Instance(null);
+    // getAllUserInstances();
+    // getAllImages();
+    // startInstance()
+    // createKeyPair("abcd");
+}
+
+
+function populateAndDisplayForm(){
+    $("#bootstrapSelectForm").removeClass("hidden");
+    getAvailabilityZones(defaultRegion);
+    getRegions();
+}
+
+function createEC2Instance(instanceObj) {
+
+    console.log("running create instance");
+
+    // if(instanceObj==null || instanceObj.KeyName == null)
+    //     return false;
+
+    var params = {
+        ImageId: 'ami-fce3c696', // Ubuntu Server 14.04 LTS (HVM), SSD Volume Type 64 bit
+        //InstanceType: instanceObj.instanceType || 't2.micro',
+        InstanceType: 't2.micro',
+        Placement:{
+            // AvailabilityZone: defaultRegion    // Specify the Availability Zone, To specify multiple Availability Zones, separate them using commas; for example, "us-west-2a, us-west-2b".
+        },
+        // KeyName: instanceObj.KeyName,
+        KeyName: "abcd",
+        InstanceInitiatedShutdownBehavior: 'stop',
+        MinCount: 1,    // minimum number of instances to launch
+        MaxCount: 1     // maximum number of instances to launch
+    };
+
+    // Create the instance
+    ec2.runInstances(params, function(err, data) {
+        if (err) {
+            console.log("Could not create instance", err);
+            return;
+        }
+
+        var instanceId = data.Instances[0].InstanceId;
+        console.log("Created instance", instanceId);
+
+        // Add Name tag to the instance
+        params = {Resources: [instanceId], Tags: [
+            // {Key: 'Name', Value: instanceObj.instanceName | instanceObj.instanceType}
+            {Key: 'Name', Value: "testing"}
+        ]};
+        ec2.createTags(params, function(err) {
+            console.log("Tagging instance", err ? "failure" : "success");
+        });
+    });
+}
+
+function startInstance(ImageIds){
+    var params = {
+        InstanceIds: ImageIds
+    };
+
+    ec2.startInstances(params, function(){
+        if(err){
+            console.log(err, err.stack);
+        }
+        else{
+            console.log(data);
+        }
+    });
+
+}
+
+function getAllUserInstances(){
+    AllUserInstances = [];
+    var params = {
+        DryRun: false
+    };
+
+    ec2.describeInstances(params, function(err, data){
+        if (err){
+            console.log(err, err.stack); // an error occurred
+        }
+        else{
+            // console.log(data);           // successful response
+            $.each(data.Reservations, function(key, group){
+                // console.log(key);
+                // console.log(group);
+                $.each(group.Instances, function(position, instance){
+                    // console.log(position);
+                    // console.log(instance);
+                    AllUserInstances.push(instance);
+                });
+            });
+        }
+        return AllUserInstances;
+    });
+}
+
+function getRegions(){
+    var params = {
+        DryRun: false
+    };
+
+    // App.blockUI({
+    //     target: "#bootstrapSelectForm",
+    //     animate: true
+    // });
+
+    ec2.describeRegions(params, function(err, data) {
+        if (err)
+            console.log(err, err.stack); // an error occurred
+        else{
+            console.log(data);           // successful response
+            $("#region_selector").empty();
+            $.each(data.Regions, function(index, obj){
+                // $("#region_selector").append("<option value='"+obj.RegionName+"'>"+decodeURIComponent(escape(regionNames[obj.RegionName]))+"</option>");
+                $("#region_selector").append("<option value='"+obj.RegionName+"'>"+regionNames[obj.RegionName]+"</option>");
+            });
+            $("#region_selector").selectpicker('refresh');
+        }
+        // App.unblockUI("#bootstrapSelectForm");
+    });
+}
+
+function getAvailabilityZones(region){
+    var params = {
+        DryRun: false,
+        Filters: [
+            {
+                Name: 'region-name',
+                Values: [
+                    region
+                ]
+            }
+        ]
+    };
+    ec2.describeAvailabilityZones(params, function(err, data) {
+        if (err)
+            console.log(err, err.stack); // an error occurred
+        else{
+            console.log(data);           // successful response
+            $("#availability_zone_selector").empty();
+            $.each(data.AvailabilityZones, function(index, obj){
+                if(obj.State == "available"){
+                    $("#availability_zone_selector").append("<option value='"+obj.ZoneName+"'>"+obj.ZoneName+"</option>");
+                }
+            });
+        }
+    });
+}
+
+function createKeyPair(keyName) {
+    var keyObj = {};
+    var params = {
+        KeyName: keyName, /* required */
+        DryRun: false
+    };
+
+    ec2.createKeyPair(params, function(err, data) {
+        if (err){
+            console.log(err, err.stack);    // an error occurred}
+        }
+        else{
+            // console.log(data);  // successful response
+            var privateKeyString = data.KeyMaterial.match("(\-\-\-\-\-BEGIN RSA PRIVATE KEY\-\-\-\-\-)([\\s\\S]*)(\-\-\-\-\-END RSA PRIVATE KEY\-\-\-\-\-)")[2];
+            privateKeyString = privateKeyString.replace(/^\s+|\s+$/gm,'');
+            $.extend(keyObj, {
+                KeyFingerprint: data.KeyFingerprint,
+                KeyName: data.KeyName,
+                PrivateKey: privateKeyString
+            });
+            console.log(keyObj);
+        }
+    });
+}
+
+function getAllImages(){
+    var params = {
+        Filters:[
+            {
+                Name: "block-device-mapping.volume-size",
+                Values:[
+                    "100"
+                ]
+            }
+        ]
+    };
+    console.log("running get all images");
+    // App.blockUI({
+    //     animate: true
+    // });
+    ec2.describeImages(params, function(err, data) {
+        if (err)
+            console.log(err, err.stack); // an error occurred
+        else{
+            console.log(data);           // successful response
+        }
+        // App.unblockUI();
+    });
+}
+
+/* End AWS */
+
 
 
 
@@ -464,13 +719,3 @@ function createBlock(detailString, attributes){
 
 
 //function creatInstance(){
-
-	
-
-
-
-
-
-
-
-
