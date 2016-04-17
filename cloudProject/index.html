@@ -9,86 +9,85 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+    <title>Grayscale - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/scrolling-nav.css" rel="stylesheet">
+    <link href="css/grayscale.css" rel="stylesheet">
 
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="css/customed.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
-
-
-    <link href="css/customed.css" rel="stylesheet">
-
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
 
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
-    </head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-    <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
-
-    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                        <li class="hidden">
-                            <a class="page-scroll" href="#page-top"></a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#about">About</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#services">Services</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i>  <span class="light"></span> EasyCloud
+                </a>
             </div>
-            <!-- /.container -->
-        </nav>
 
-        <!-- Intro Section -->
-        <section id="intro" class="intro-section">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Setting VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Generate VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Launch VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Team</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#message">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Scrolling Nav</h1>
-                        <p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>, and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding ID on the page.</p>
-                        <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">EasyCloud</h1>
+                        <p class="intro-text">A free cloud-service-recommendaton tool<br>And launch your virtual machine on cloud in no time.</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </header>
 
         <!-- About Section -->
    <!--      <section id="about" class="about-section">
@@ -102,26 +101,28 @@
         </section> -->
         <section id="about" class="container content-section text-center">
             <div class="row">
+            <div class="col-lg-12">
+                <h1 style="text-align:left;">Set Your Preference</h1>
                 <div class="col-lg-8 col-lg-offset-2">
                     <form action="">
-                        <h2>CPU Power</h2>
+                        <h4>CPU Power (No. of cores)</h4>
 
-                        <input type="text" name="lname" value="2" id="cpuPower"><br>                   
-
-                        <br />
-                        <h2>RAM</h2>
-
-                        <input type="text" name="lname" id="ram"><br>
+                        <input type="text" name="lname" value="2" id="cpuPower" style="color:black;"><br>        
 
                         <br />
+                        <h4>RAM (GB)</h4>
 
-                        <h2>Storage Size</h2>
-
-                        <input type="text" name="lname" id="storageSize"><br>
+                        <input type="text" name="lname" id="ram" value="8" style="color:black;"><br>
 
                         <br />
 
-                        <h2>Opearating System</h2>
+                        <h4>Storage Size (GB)</h4>
+
+                        <input type="text" name="lname" value="10" id="storageSize" style="color:black;"><br>
+
+                        <br />
+
+                        <h4>Operating System</h4>
                         <div class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="linux" id="radio14" name="os" > <label for="radio14"><span></span>Linux</label>  </input>                    
@@ -130,10 +131,9 @@
                                 <input type="radio" value="winsows" id="radio15" name="os"/> <label for="radio15"><span></span>Windows</label>                      
                             </div>
                         </div>
-
                         <br />
 
-                        <h2>Storage Type</h2>
+                        <h4>Storage Type</h4>
                         <div class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="ssd" id="radio01" name="disk" > <label for="radio01"><span></span>SSD</label>  </input>                    
@@ -142,8 +142,8 @@
                                 <input type="radio" value="std" id="radio02" name="disk"/> <label for="radio02"><span></span>Standard</label>                      
                             </div>
                         </div>
-
-                        <h2>Subscription</h2>
+                        <br />
+                        <h4>Subscription</h4>
                         <div class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="lessThanOne" id="radio03" name="sub" /> <label for="radio03"><span></span>Less than one Month</label>                      
@@ -154,7 +154,7 @@
                         </div>
 
                         <br />
-                        <h2>Region</h2>
+                        <h4>Region</h4>
                         <div  class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="us" id="radio05" name="region" /> <label for="radio05"><span></span>US</label>                      
@@ -168,7 +168,7 @@
                         
                         </div>
                         <br />
-                        <h2>Do you need Mobile APP for cloud?</h2>
+                        <h4>Do you need Mobile APP for cloud?</h4>
                         <div  class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="no" id="radio08" name="mobileApp" /> <label for="radio08"><span></span>NO</label>                      
@@ -176,10 +176,10 @@
                             <div class="btn btn-default btn-lg">                        
                                 <input type="radio" value="no" id="radio09" name="mobileApp"/> <label for="radio09"><span></span>YES</label>                      
                             </div>
-=
+
                         </div>
                         <br />
-                        <h2>Do you need Multiple IP per cloud server</h2>
+                        <h4>Do you need Multiple IP per cloud server</h4>
                         <div  class="list-inline banner-social-buttons">
                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="no" id="radio10" name="multiIp" /> <label for="radio10"><span></span>NO</label>                      
@@ -187,26 +187,26 @@
                             <div class="btn btn-default btn-lg">                        
                                 <input type="radio" value="yes" id="radio11" name="multiIp"/> <label for="radio11"><span></span>YES</label>                      
                             </div>
-=
+
                         </div>
                         <br />
-                        <h2>Do you need comprehensive English documentation?</h2>
+                        <h4>Do you need comprehensive English documentation?</h4>
                         <div  class="list-inline banner-social-buttons">
-                            <div class="btn btn-default btn-lg">                      
+                             <div class="btn btn-default btn-lg">                      
                                 <input type="radio" value="no" id="radio12" name="en" /> <label for="radio12"><span></span>NO</label>                      
                             </div>
                             <div class="btn btn-default btn-lg">                        
                                 <input type="radio" value="yes" id="radio13" name="en"/> <label for="radio13"><span></span>YES</label>                      
                             </div>
-=
+
                         </div>
 
-                        <a type="button" id="submitChoices"class="btn btn-primary" value="Submit">Submit</a>
+                        <a type="button" class="btn btn-primary" value="Submit" style="display:none;">Submit</a>
                     </form>
-                    <a href="#download" class="btn btn-circle page-scroll">
+                    <a href="#services" id="submitChoices" class="btn btn-circle page-scroll">
                         <i class="fa fa-angle-double-down animated"></i>
                     </a>
-
+                    </div>
                 </div>
             </div>
         </section>
@@ -225,7 +225,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
-                                    <div class="modal-header">
+                                    <div class="modal-header" style="color:black;">
                                         <button type="button" class="close" 
                                         data-dismiss="modal">
                                         <span aria-hidden="true">&times;</span>
@@ -265,6 +265,7 @@
                             <a id="creatButton" data-target=type="button" class="btn btn-primary" data-dismiss="modal" href="#contact">
                                 Submit and Create Instance
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -287,7 +288,7 @@
                             </a>
                             <a  class="list-group-item">
 
-                                <i class="fa fa-server fa-fw"></i> Instance Size
+                               <i class="fa fa-server fa-fw"></i> Instance Size
 
                                 <span class="pull-right text-muted small"><em id="recdIS">-</em>
                                 </span>
@@ -305,7 +306,7 @@
                                 </span>
                             </a>
                             <a  class="list-group-item">
-                                <i class="fa fa-upload fa-fw"></i> Disk Size
+                               <i class="fa fa-upload fa-fw"></i> Disk Size
                                 <span class="pull-right text-muted small"><em id="recdDS">-</em>
                                 </span>
                             </a>
@@ -317,7 +318,7 @@
                             
                         </div>
                         <!-- /.list-group -->
-                        <a class="btn btn-default btn-block"></a>
+                        <a class="btn btn-default btn-block" ></a>
                         <!--                         <a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a> -->
                     </div>
                     <!-- /.panel-body -->
@@ -331,79 +332,93 @@
                     <div class="panel-heading">Select By Myself
                     </div>
                     <div class="panel-body">
-                        <form id="bootstrapSelectForm" method="post" class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Service Provider</label>
-                                <div class="col-xs-5 selectContainer">
-                                    <select id="service_selector" name="language" class="form-control selectpicker" data-show-icon="true">
-                                        <option value="aws" data-content="<i class='fa fa-amazon fa-fw'></i>AWS"></option>
-                                        <option value="google" data-content="<i class='fa fa-google fa-fw'></i>Google Cloud"></option>
-                                        <option value="aliyun" data-content="<i class='fa fa-cloud fa-fw'></i>Aliyun"></option>
+                        <form id="" method="post" class="form-horizontal">
+
+                            <div class="form-group" >
+
+                                <label class="col-xs-3 control-label" style="color:black">Service Provider</label>
+                                 <div class="col-xs-5 selectContainer" >
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="service_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald " data-show-icon="true">
+                                        <option value="aws" data-content="<i class='fa fa-amazon fa-fw'></i>">AWS</option>
+                                        <option value="google" data-content="<i class='fa fa-google fa-fw'></i>">Google Cloud</option>
+                                        <option value="aliyun" data-content="<i class='fa fa-cloud fa-fw'></i>">Aliyun</option>
                                     </select>
+                                    </span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Instance Size</label>
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Instance Size</label>
                                 <div class="col-xs-5 selectContainer">
-                                    <select id = "size_selector" name="language" class="form-control selectpicker">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "size_selector" name="language"class="custom-dropdown__select custom-dropdown__select--emerald ">
                                         <option value="small">aSmall</option>
                                         <option value="medium">aMedium</option>
                                         <option value="large">aLarge</option>
                                     </select>
+                                </span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Opearating System</label>
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Opearating System</label>
                                 <div class="col-xs-5 selectContainer">
-                                    <select id = "os_selector" name="language" class="form-control selectpicker">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "os_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald ">
                                         <option value="ubuntu">Ubuntu</option>
                                         <option value="centos">CentOS</option>
                                         <option value="debian">Debian</option>
                                         <option value="suse">OpenSUSE</option>
                                         <option value="windows">Windows Server</option>
                                     </select>
+                                </span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Disk Type</label>
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Disk Type</label>
                                 <div  class="col-xs-5 selectContainer ">
-                                    <select id = "diskT_selector" name="language" class="form-control selectpicker">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "diskT_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
                                         <option value="normal">Normal</option>
                                         <option value="ssd">SSD</option>
                                     </select>
+                                </span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Disk Size</label>
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Disk Size</label>
                                 <div class="col-xs-5 selectContainer">
-                                    <select id="diskS_selector" name="language" class="form-control selectpicker">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="diskS_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
 
                                         <option value="small">Small(10G)</option>
                                         <option value="medium">Medium(30G)</option>
                                         <option value="large">Large(80G)</option>
                                     </select>
-
+                                    </span>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-xs-3 control-label">Region</label>
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Region</label>
                                 <div class="col-xs-5 selectContainer">
-                                    <select id="region_selector" name="language" class="form-control selectpicker">
+                                     <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="region_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
 
                                         <option value="am">America</option>
                                         <option value="as">Asia</option>
                                         <option value="eu">Europe</option>
                                     </select>
+
+                                </span>
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <div class="col-xs-5 col-xs-offset-3">
                                     <a  class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a>
                                 </div>
@@ -427,7 +442,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Contact Section</h1>
+                <h1>Manage Instance</h1>
             </div>
         </div>
 
@@ -537,6 +552,55 @@
     </div>
 </section>
 
+    <section id="team" class="content-section text-center">
+        <div class="team-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Team Members</h2>                                       
+                </div>
+                 <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="" style="position: relative; left:75px">
+                <h3>Aman Middha
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="" style="position: relative; left:75px">
+                <h3>Ibrahim Mohammed
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <h3></h3>
+                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="" style="position: relative; left:75px">
+                <h3>Haoyuan Tom Chen
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+            </div>
+            
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="" style="position: relative; left:75px">
+                    <h3>Yaohai Peter Xu
+                        <!--<small>Job Title</small>-->
+                    </h3>
+                    <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="" style="position: relative; left:75px">
+                    <h3>Yumeng Margaret Wang
+                        <!--<small>Job Title</small>-->
+                    </h3>
+                    <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                </div>
+            s
+            </div>
+        </div>
+    </section>
+
+
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 
@@ -546,10 +610,11 @@
 <!-- Scrolling Nav JavaScript -->
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/scrolling-nav.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script> -->
 <script src="js/aliyun-sdk.js"></script>
-<script src="js/costumed.js" ></script>
+<script src="js/customed.js" ></script>
 <script src="js/decisionTree.js" ></script>
+<script src="https://apis.google.com/js/client.js"></script>
 
 </body>
 

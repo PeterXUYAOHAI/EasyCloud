@@ -40,19 +40,19 @@ $("#submitChoices").click(function(){
 		serviceDecisionString="Aliyun";
 
 	$("#service_selector").val(serviceDecision);
-	$("#service_selector").selectpicker('refresh');
-		$('#size_selector').selectpicker('refresh');
+	//$("#service_selector").selectpicker('refresh');
+	//$('#size_selector').selectpicker('refresh');
 
-	if(CPUPower>=2)
+	if(CPUPower>=4)
 		instanceSize = "medium";
-
-	if(RAM>=4)
-		instanceSize = "medium";
-
-	if(CPUPower>4)
-		instanceSize = "large";
 
 	if(RAM>=8)
+		instanceSize = "medium";
+
+	if(CPUPower>8)
+		instanceSize = "large";
+
+	if(RAM>=16)
 		instanceSize = "large";
 
 
