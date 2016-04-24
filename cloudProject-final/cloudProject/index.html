@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+        /*
+            B.E.M Naming convention:
+            (Block) .custom-dropdown            = The main component
+            (Element) .custom-dropdown__select  = Descendant of .custom-dropdown
+            (Modifier) .custom-dropdown--*      = Different state of .custom-dropdown
+        */
+
+        .custom-dropdown--large {
+            font-size: 1.5em;
+        }
+
+        .custom-dropdown--small {
+            font-size: .7em;
+        }
+
+        .custom-dropdown__select{
+            font-size: inherit; /* inherit size from .custom-dropdown */
+            padding: .5em; /* add some space*/
+            margin: 0; /* remove default margins */
+        }
+
+        .custom-dropdown__select--white {
+            background-color: #fff;
+            color: #444;    
+        }   
+        
+        .custom-dropdown__select--emerald {
+            background-color: #20b390;
+            color: #fff;    
+        }               
+
+        .custom-dropdown__select--red {
+            background-color: #d53a22;
+            color: #fff;
+        }
+
+        @supports (pointer-events: none) and
+                  ((-webkit-appearance: none) or
+                  (-moz-appearance: none) or
+                  (appearance: none)) {
+
+            
+            h2+p {
+                color: green; /* Demo only */
+            }
+
+            .custom-dropdown {
+                position: relative;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .custom-dropdown__select {
+                padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */             
+                border: 0;
+                border-radius: 3px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;    
+            }
+
+            .custom-dropdown::before,
+            .custom-dropdown::after {
+                content: "";
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .custom-dropdown::after { /*  Custom dropdown arrow */
+                content: "\25BC";
+                height: 1em;
+                font-size: .625em;
+                line-height: 1;
+                right: 1.2em;
+                top: 50%; margin-top: -.5em;
+            }
+
+            .custom-dropdown::before { /*  Custom dropdown arrow cover */
+                width: 2em;
+                right: 0; top: 0; bottom: 0;
+                border-radius: 0 3px 3px 0;
+            }
+
+            .custom-dropdown__select[disabled] {
+                color: rgba(0,0,0,.3);
+            }
+
+            .custom-dropdown.custom-dropdown--disabled::after {
+                color: rgba(0,0,0,.1);
+            }
+
+            /* White dropdown style */
+            .custom-dropdown--white::before {
+                background-color: #fff;
+                border-left: 1px solid rgba(0,0,0,.1);
+            }
+
+            .custom-dropdown--white::after {
+                color: rgba(0,0,0,.9);
+            }                   
+
+            /* Emerald dropdown style */
+            .custom-dropdown--emerald::before {
+                background-color: #1aa181;
+            }
+
+            .custom-dropdown--emerald::after {
+                color: rgba(0,0,0,.4);
+            }
+
+
+            /* Red dropdown style */
+            .custom-dropdown--red::before {
+                background-color: #d53a22;
+            }
+
+            .custom-dropdown--red::after {
+                color: rgba(0,0,0,.4);
+            }
+
+            /* FF only temporary & ugly fixes */
+            /* the "appearance: none" applied on select still shows a dropdown arrow on Firefox */
+            /* https://bugzilla.mozilla.org/show_bug.cgi?id=649849 */
+            @-moz-document url-prefix() {
+                .custom-dropdown__select                         { padding-right: .9em }
+                .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
+                .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
+            }   
+
+        }
+    </style>
+
+</head>
+
+
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-play-circle"></i>  <span class="light"></span> EasyCloud
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Setting VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Start VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Manage VM</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Team</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">EasyCloud</h1>
+                        <p class="intro-text">A free cloud-service-recommendaton tool<br>And launch your virtual machine on cloud in no time.</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <!-- About Section -->
+   <!--      <section id="about" class="about-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>About Section</h1>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <section id="about" class="container content-section text-center">
+            <div class="row">
+            <div class="col-lg-12">
+                <h1 style="text-align:left;">Set Your Preference</h1>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <table>
+                        <tr>
+                        <td>
+                        <h4>CPU Power (No. of cores)</h4>
+
+                        <input type="text" name="lname" value="2" id="cpuPower" style="color:black;"><br>        
+
+                        </td>
+                        <td>
+                        <h4>RAM (GB)</h4>
+
+                        <input type="text" name="lname" id="ram" value="8" style="color:black;"><br>
+
+                        </td>
+                        <td>
+                        <h4>Storage Size (GB)</h4>
+
+                        <input type="text" name="lname" value="10" id="storageSize" style="color:black;"><br>
+                        </td>
+                        </tr>
+
+                        
+                        <tr>
+                            <td><br /></td>
+                        </tr>
+
+                        <tr>
+                        <td >
+                        <h4>Operating System</h4>
+                        <div class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="linux" id="radio14" name="os" > <label for="radio14"><span></span>Linux</label>  </input>                    
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="winsows" id="radio15" name="os"/> <label for="radio15"><span></span>Windows</label>                      
+                            </div>
+                        </div>
+                        </td>
+
+                        <td>
+                        </td>
+
+                        <td>
+                        <h4>Storage Type</h4>
+                        <div class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="ssd" id="radio01" name="disk" > <label for="radio01"><span></span>SSD</label>  </input>                    
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="std" id="radio02" name="disk"/> <label for="radio02"><span></span>Standard</label>                      
+                            </div>
+                        </div>
+                        </td>
+                        </tr>
+                        
+                         <tr>
+                            <td><br /></td>
+                        </tr>
+
+                        <tr>
+                        <td>
+                        <h4>Subscription</h4>
+                        <div class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="1" id="radio03" name="sub" /> <label for="radio03"><span></span>Less than one Month</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="2" id="radio04" name="sub"/> <label for="radio04"><span></span>More than one Month</label>                      
+                            </div>
+                        </div>
+                        </td>
+
+                        <td>
+                        </td>
+
+                        <td>
+                        <h4>Region</h4>
+                        <div  class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="us" id="radio05" name="region" /> <label for="radio05"><span></span>US</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="eu" id="radio06" name="region"/> <label for="radio06"><span></span>Europe</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="asia" id="radio07" name="region"/> <label for="radio07"><span></span>Asia</label>                      
+                            </div>
+                        
+                        </div>
+                        </td>
+                         </tr>
+                        
+                         <tr>
+                            <td><br /></td>
+                        </tr>
+
+                        <tr>
+                        <td>
+                        <h4>Do you need Mobile APP for cloud?</h4>
+                        <div  class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="no" id="radio08" name="mobileApp" /> <label for="radio08"><span></span>NO</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="no" id="radio09" name="mobileApp"/> <label for="radio09"><span></span>YES</label>                      
+                            </div>
+
+                        </div>
+                        </td>
+
+                        <td>
+                        <h4>Do you need Multiple IP per cloud server</h4>
+                        <div  class="list-inline banner-social-buttons">
+                            <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="no" id="radio10" name="multiIp" /> <label for="radio10"><span></span>NO</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="yes" id="radio11" name="multiIp"/> <label for="radio11"><span></span>YES</label>                      
+                            </div>
+                        </div>
+                        </td>
+
+                        <td>
+                        <h4>Do you need comprehensive English documentation?</h4>
+                        <div  class="list-inline banner-social-buttons">
+                             <div class="btn btn-default btn-lg">                      
+                                <input type="radio" value="no" id="radio12" name="en" /> <label for="radio12"><span></span>NO</label>                      
+                            </div>
+                            <div class="btn btn-default btn-lg">                        
+                                <input type="radio" value="yes" id="radio13" name="en"/> <label for="radio13"><span></span>YES</label>                      
+                            </div>
+                        </div>
+                        </td>
+                        </tr>
+                        </table>
+
+                        <a  type="button" class="btn btn-primary" value="Submit" style="display:none;">Submit</a>
+                    
+                    <a href="#services" id="submitChoices" class="btn btn-circle page-scroll" >
+                        <i class="fa fa-angle-double-down animated"></i>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Start Instance</h1>
+                        <div class="row">
+
+                        <!-- modal -->
+                        <!--  <div class="modal fade" id="KeyModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="KeyModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content"> -->
+                                        <!-- Modal Header -->
+                                       <!--  <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <h4 class="modal-title" id="KeyModalLabel">
+                                                Select an Existing Key Pair or Create a New Key Pair
+                                            </h4>
+                                        </div> -->
+
+                                        <!-- Modal Body -->
+                                      <!--   <div class="modal-body">
+                                            <form role="form" class="form-horizontal" id="KeyPairForm">
+                                                <div class="form-group">
+                                                    <div class="col-xs-offset-1 col-xs-10 selectContainer">
+                                                        <select id = "key_pair_action_selector" name="language" class="form-control selectpicker">
+                                                            <option value="existing_key_pair" selected>Choose an existing key pair</option>
+                                                            <option value="new_key_pair">Create a new key pair</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div id="keyPairAction" class="col-xs-offset-1 col-xs-10 selectContainer">
+                                                        <label class="control-label" id="key_pair_selector_label">Select a Key Pair</label>
+                                                        <select id ="key_pair_selector" class="form-control selectpicker">
+                                                            <option value=""></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div> -->
+
+                                        <!-- Modal Footer -->
+                                        <!-- <div class="modal-footer">
+                                            <div class="error-message"> -->
+                                                <!--For error messages-->
+                                           <!--  </div>
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button id="CreateInstanceButton" data-target=type="button" class="btn btn-primary" data-dismiss="modal">
+                                                Create
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    Modal Header
+                                    <div class="modal-header" style="color:black;">
+                                        <button type="button" class="close" 
+                                        data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Please Input Key
+                                    </h4>
+                                </div> 
+
+                                <!-- Modal Body -->
+                                 <div class="modal-body">
+
+                                    <form role="form" id="keyForm">
+                                      <div class="form-group">
+                                        <label id="publicKeyLabel" style="color:black;">Public Key</label>
+                                        <input id="publicKey" type="email" class="form-control"
+                                        placeholder="Public Key"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publicKeyLabel" style="color:black;">Secret Key</label>
+                                        <input id="secretKey" type="password" class="form-control"
+                                        placeholder="Secret Key"/>
+                                    </div>
+                                    <div class="form-group" style="color:black;">
+                                       <label for="publicKeyLabel">API Key</label>
+                                        <input id="googleApiKey" type="password" class="form-control"
+                                        placeholder="Secret Key"/>
+                                   </div>
+                                    
+                                </form>
+
+
+                            </div>
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <a id="a" href="https://appengine.google.com/" target="_blank">No account?Register here</a>
+                                <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                                Close
+                            </button>
+                            <a id="creatButton" data-target=type="button" class="btn btn-primary" data-dismiss="modal" href="#contact" >
+                                Submit and Create Instance
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-4">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-thumbs-o-up fa-fw"></i>
+                        Recommend Setting
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a  class="list-group-item">
+
+                                <i class="fa fa-cloud fa-fw"></i> Service Provider
+                                <span class="pull-right text-muted small"><em id="recdSP">-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+
+                               <i class="fa fa-server fa-fw"></i> Instance Size
+
+                                <span class="pull-right text-muted small"><em id="recdIS">-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-envelope fa-fw"></i> Opearating System
+                                <span class="pull-right text-muted small"><em id="recdOS">-</em>
+                                </span>
+
+
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-tasks fa-fw"></i> Disk Type
+                                <span class="pull-right text-muted small"><em id="recdDT">-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                               <i class="fa fa-upload fa-fw"></i> Disk Size
+                                <span class="pull-right text-muted small"><em id="recdDS">-</em>
+                                </span>
+                            </a>
+                            <a  class="list-group-item">
+                                <i class="fa fa-bolt fa-fw"></i> Region
+                                <span class="pull-right text-muted small"><em id="recdReg">-</em>
+                                </span>
+                            </a>
+                            
+                        </div>
+                        <!-- /.list-group -->
+                        <a class="btn btn-default btn-block" ></a>
+                        <!--                         <a class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a> -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Select By Myself
+                    </div>
+                    <div class="panel-body">
+                        <form id="" method="post" class="form-horizontal">
+
+                            <div class="form-group" >
+
+                                <label class="col-xs-3 control-label" style="color:black">Service Provider</label>
+                                 <div class="col-xs-5 selectContainer" >
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="service_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald " data-show-icon="true">
+                                        <option value="google" data-content="<i class='fa fa-google fa-fw'></i>">Google Cloud</option>
+                                        <option value="aws" data-content="<i class='fa fa-amazon fa-fw'></i>">AWS</option>
+                                        <option value="aliyun" data-content="<i class='fa fa-cloud fa-fw'></i>">Aliyun</option>
+                                    </select>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Instance Size</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "size_selector" name="language"class="custom-dropdown__select custom-dropdown__select--emerald ">
+                                        <option value="f1-micro" selected="selected">Small</option><option value="n1-standard-4">Medium</option><option value="n1-highmem-8">Large</option>
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Opearating System</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "os_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald ">
+                                        <option value="ubuntu">Ubuntu</option>
+                                        <option value="centos">CentOS</option>
+                                        <option value="debian">Debian</option>
+                                        <option value="suse">OpenSUSE</option>
+                                        <option value="windows">Windows Server</option>
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Disk Type</label>
+                                <div  class="col-xs-5 selectContainer ">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id = "diskT_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
+                                        <option value="normal">Normal</option>
+                                        <option value="ssd">SSD</option>
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Disk Size</label>
+                                <div class="col-xs-5 selectContainer">
+                                    <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="diskS_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
+
+                                        <option value="small">Small(10G)</option>
+                                        <option value="medium">Medium(30G)</option>
+                                        <option value="large">Large(80G)</option>
+                                    </select>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label class="col-xs-3 control-label" style="color:black">Region</label>
+                                <div class="col-xs-5 selectContainer">
+                                     <span class="custom-dropdown custom-dropdown--emerald">
+                                    <select id="region_selector" name="language" class="custom-dropdown__select custom-dropdown__select--emerald">
+
+                                    <option value="asia-east1-b">Taiwan</option>
+                                    <option value="europe-west1-b">Belgium</option>
+                                    <option value="us-central1-b">US Iowa</option>
+                                    <option value="us-east1-b">US South Carolina</option>
+                                    </select>
+
+                                </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" >
+                                <div class="col-xs-5 col-xs-offset-3">
+                                    <a  class="btn btn-default btn-block" data-toggle="modal" data-target="#myModalNorm">Confirm</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Manage Instance</h1>
+            </div>
+        </div>
+
+        <div id="instanceList" class="row">
+          <!--   <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-comments fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">26</div>
+                                <div>New Comments!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">12</div>
+                                <div>New Tasks!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">124</div>
+                                <div>New Orders!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div> -->
+<!--             <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-cloud fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">Aliyun ECS</div>
+                                <div>Public IP: </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                       <div class="panel panel-default" id="panel3">
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">Anim pariatur cliche reprehenderit, </div>
+                            </div>
+                        </div>
+                        <a data-toggle="collapse" data-target="#collapseThree"
+                            href="#collapseThree" class="collapsed">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </a>
+                    <button class="btn btn-primary btn-md"> Start </button>
+                    <button class="btn btn-warning btn-md"> Stop </button>
+                    <button class="btn btn-danger btn-md"> Terminate </button>
+
+                    </div>
+                </div>
+            </div> -->
+            <!--             <button id="test">Test</button> -->
+        </div>
+
+
+    </div>
+</section>
+
+    <section id="team" class="content-section text-center">
+        <div class="team-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Team Members</h2>                                       
+                </div>
+                 <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="img/aman.jpg" alt="" style="position: relative; left:75px">
+                <h3>Aman Middha
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <p>Decision Tree Engineer</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="img/ibra.jpg" alt="" style="position: relative; left:75px">
+                <h3>Ibrahim Mohammed
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <h3></h3>
+                <p>AWS Service Engineer</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="img/tom.jpg" alt="" style="position: relative; left:75px">
+                <h3>Haoyuan Tom Chen
+                    <!--<small>Job Title</small>-->
+                </h3>
+                <p>Google Service Engineer</p>
+            </div>
+            
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="img-circle img-responsive img-center" src="img/peter.jpg" alt="" style="position: relative; left:75px">
+                    <h3>Yaohai Peter Xu
+                        <!--<small>Job Title</small>-->
+                    </h3>
+                    <p>Aliyun Service Engineer</p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img class="img-circle img-responsive img-center" src="img/wang.jpg" alt="" style="position: relative; left:75px">
+                    <h3>Yumeng Margaret Wang
+                        <!--<small>Job Title</small>-->
+                    </h3>
+                    <p>Project Coordinator</p>
+                </div>
+            s
+            </div>
+        </div>
+    </section>
+
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Scrolling Nav JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script> -->
+<script src="js/aliyun-sdk.js"></script>
+<script src="js/aws-sdk.js"></script>
+<script src="js/jquery.blockUI.min.js"></script>
+<script src="js/App.js"></script>
+<script src="js/costumed-backup.js" ></script>
+<script src="js/decisionTree.js" ></script>
+<script src="https://apis.google.com/js/client.js"></script>
+
+</body>
+
+</html>
